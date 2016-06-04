@@ -1,0 +1,12 @@
+### gloyofme template
+.idea/
+.idea_modules/
+out/
+
+*impl
+*.ipr
+*.iws
+*.calss
+
+**/target/
+
