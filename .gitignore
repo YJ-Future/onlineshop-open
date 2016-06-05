@@ -2,11 +2,11 @@
 .idea/
 .idea_modules/
 out/
-
-*impl
+target/
+*.iml
 *.ipr
 *.iws
 *.calss
 
-**/target/
+
 
