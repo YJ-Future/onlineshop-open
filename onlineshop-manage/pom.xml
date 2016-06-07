@@ -12,6 +12,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>onlineshop-manage</artifactId>
     <packaging>pom</packaging>
+
     <modules>
         <module>onlineshop-manage-pojo</module>
         <module>onlineshop-manage-mapper</module>
