@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gloryofme.onlineshop.manage.mapper.ItemMapper">
+    <resultMap id = "ItemResult" type = "com.gloryofme.onlineshop.manage.pojo.Item">
+        <id property="id" column = "id" jdbcType="BIGINT"/>
+        <result column = "title" property = "title" jdbcType="VARCHAR"/>
+        <result column = "sell_point" property = "sellPoint" jdbcType="VARCHAR"/>
+        <result column = "price" property = "price" jdbcType="BIGINT"/>
+        <result column = "barcode" property = "barcode" jdbcType="VARCHAR"/>
+        <result column = "image" property = "image" jdbcType="VARCHAR"/>
+        <result column = "cid" property = "cid" jdbcType="BIGINT"/>
+        <result column = "status" property = "status" jdbcType="TINYINT"/>
+        <result column = "created" property = "created" jdbcType="TIMESTAMP"/>
+        <result column = "updated" property = "updated" jdbcType = "TIMESTAMP"/>
+    </resultMap>
+    <!--查询的基本字段-->
+    <sql id = "base_column_list">
+        id, title, sell_point, price, num, barcode, image, cid, status, created, updated
+    </sql>
+    <!--查询条件-->
+    <sql id = "selectCondition">
+        <trim prefix="where" prefixOverrides = "and|or" suffixOverrides = "and|or" >
+            <if test = "id != null">
+                and id = #{id}
+            </if>
+            <if test = "cid != null">
+                and cid = #{cid}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </trim>
+    </sql>
+    <!--查询商品-->
+    <select id = "selectById" resultMap = "ItemResult">
+      select 
+      <include refid="base_column_list"/>
+      from tb_item
+      where id = #{id}
+    </select>
+    <select id = "selectByArgs"  parameterType = "com.gloryofme.onlineshop.manage.pojo.ItemArgs" resultMap = "ItemResult">
+      select
+      <include refid="base_column_list"/>
+      from tb_item
+      <include refid="searchCondition"/>
+    </select>
+    <!--添加商品-->
+    <insert id = "insert" parameterType="com.gloryofme.onlineshop.manage.pojo.Item">
+      insert into tb_item (
+      <include refid="base_colum_list"/>
+      )
+      values (#{id}, #{title}, #{sellPoint, jdbcType = VARCHAR]}, #{price},
+        #{num}, #{barcode, jdbcType=VARCHAR}, #{image, jdbcType=VARCHAR}, #{cid},
+        #{status}, #{created}, #{updated})
+    </insert>
+    <!--删除商品-->
+    <delete id="deleteById" parameterType="java.lang.Long">
+      delete from tb_item
+      where id = #{id}
+    </delete>
+    <delete id = "deleteByArgs" parameterType = "com.gloryofme.onlineshop.manage.pojo.ItemArgs">
+      delete from tb_item
+      <include refid="selectCondition"/>
+    </delete>
+    <!--更新商品-->
+    <update id="update" parameterType="">
+        <if test="id != null and id > 0">
+            update tb_item
+            <trim prefix = "set" prefixOverrides="," suffixOverrides=",">
+                <if test="title !=null and !title.isEmpty()">
+                    title = #{title},
+                </if>
+                <if test = "sellPoint != null">
+                    sell_point = #{sellPoint}
+                </if>
+                <if test = "price != null and price >= 0">
+                    price = #{price}
+                </if>
+                <if test = "num != null and num >=0 ">
+                    num = #{num}
+                </if>
+                <if test = "barcode != null">
+                    barcode = #{barcode}
+                </if>
+                <if test = "image != null">
+                    image = #{image}
+                </if>
+                <if test = "cid != null">
+                    cid = #{cid}
+                </if>
+                <if test = "status != null">
+                    status = #{status}
+                </if>
+                <if test="created != null">
+                    created = #{created}
+                </if>
+                <if test="updated != null">
+                    updated = #{updated}
+                </if>
+            </trim>
+            where id = #{id}
+        </if>
+    </update>
+</mapper>

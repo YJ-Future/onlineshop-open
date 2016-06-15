@@ -37,6 +37,7 @@
         <pagehelper.version>4.1.5</pagehelper.version>
         <jsplparser.version>0.9.1</jsplparser.version>
         <jedis.version>2.7.2</jedis.version>
+        <guava.version>19.0</guava.version>
         <junit.version>4.12</junit.version>
         <!--插件-->
         <tomcat7.version>2.2</tomcat7.version>
