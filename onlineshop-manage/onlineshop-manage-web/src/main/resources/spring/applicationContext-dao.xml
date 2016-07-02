@@ -26,5 +26,6 @@
     <!--配置mybatis的mapper扫描路径-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.gloryofme.onlineshop.manage.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 </beans>

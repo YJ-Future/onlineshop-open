@@ -1,23 +1,22 @@
 package com.gloryofme.onlineshop.manage.pojo;
-
-import java.util.Date;
-
 /**
  * 商品类
  * Created by YU on 2016/6/9.
  */
-public class Item {
+public class Item extends BasePojo{
     private Long id;
     private String title;
-    private String sellPoint;//商品买点
+    //商品买点
+    private String sellPoint;
     private Long price;
     private Integer num;
-    private String barcode;//商品的条形码
+    //商品的条形码
+    private String barcode;
     private String image;
-    private Long cid;//商品类型ID
-    private Byte status;//商品的状态
-    private Date created;//商品添加时间
-    private Date updated;//商品更新时间
+    //商品类型ID
+    private Long cid;
+    //商品的状态
+    private Integer status;
 
     public Long getId() {
         return id;
@@ -83,27 +82,12 @@ public class Item {
         this.cid = cid;
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public Date getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(Date updated) {
-        this.updated = updated;
-    }
 }

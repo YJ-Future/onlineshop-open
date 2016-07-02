@@ -3,7 +3,7 @@ package com.gloryofme.onlineshop.manage.pojo;
 /**商品操作的参数类
  * Created by YU on 2016/6/9.
  */
-public class ItemArgs {
+public class ItemParam extends BasePojo {
     private Long id;
     private String title;
     private Integer num;
