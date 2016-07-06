@@ -12,6 +12,8 @@ import java.util.List;
 public interface ItemCategoryMapper {
     //根据类目ID获取类目
     ItemCategoryResult selectById(Long id);
+    //根据类目部门信息查找类目全部信息
+    List<ItemCategory> select(ItemCategory category);
     //根据类目ID获取子类目 往下找一级子类目
     List<ItemCategoryResult> selectChildrenById(Long id);
     int insert(Item item);

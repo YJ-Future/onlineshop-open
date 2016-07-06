@@ -20,18 +20,21 @@
         <result column="is_parent" property="isParent" jdbcType="INTEGER"/>
         <result column="created" property="created" jdbcType="TIMESTAMP"/>
         <result column="updated" property="updated" jdbcType="TIMESTAMP"/>
-        <!--<collection property="children" resultMap="ItemCatResult">
-            <id property="id" column=""></id>
-        </collection>-->
     </resultMap>
     <!--操作-->
     <select id="selectById" parameterType="Long" resultMap="ItemCatResult">
         select
         <include refid="base_column_list"/>
         from tb_item_cat
-        where id = #{id}
+        <include refid="selectCondition"/>
     </select>
-
+    <select id="select" parameterType="com.gloryofme.onlineshop.manage.pojo.ItemCategory" resultMap="ItemCategoryResult">
+        select
+        <include refid="base_column_list"/>
+        from tb_item_cat
+        <include refid="selectCondition"/>
+        order by parent_id, sort_order
+    </select>
     <select id="selectChildrenById" parameterType="Long" resultMap="ItemCatResult">
         select
         <include refid="base_column_list"/>
@@ -56,7 +59,7 @@
             <if test="id != null">
                 and id = #{id}
             </if>
-            <if test="name != nul">
+            <if test="name != null">
                 and name = #{name}
             </if>
             <if test="sortOrder != null">
