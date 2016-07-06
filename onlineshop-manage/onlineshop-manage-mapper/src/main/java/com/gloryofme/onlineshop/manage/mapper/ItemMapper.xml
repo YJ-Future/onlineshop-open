@@ -22,11 +22,26 @@
         from tb_item
         where id = #{id}
     </select>
+
+    <select id = "selectPage"  parameterType="java.lang.Long" resultMap="ItemResult">
+        select
+        <include refid="base_column_list"/>
+        from tb_item
+        <if test = "start != null and start >= 0 and size != null and size > 0">
+            limit #{start},#{size}
+        </if>
+    </select>
+
     <select id = "selectByArgs" parameterType = "com.gloryofme.onlineshop.manage.pojo.ItemParam" resultMap = "ItemResult">
         select
         <include refid="base_column_list"/>
         from tb_item
         <include refid="selectCondition"/>
+    </select>
+
+    <!--获取总商品个数-->
+    <select id="selectCount" resultType="java.lang.Long">
+        select count(0) from tb_item
     </select>
     <!--添加商品-->
     <insert id = "insert" parameterType="com.gloryofme.onlineshop.manage.pojo.Item">
@@ -35,7 +50,7 @@
         )
         values (#{id}, #{title}, #{sellPoint, jdbcType = VARCHAR}, #{price},
         #{num}, #{barcode, jdbcType=VARCHAR}, #{image, jdbcType=VARCHAR}, #{cid},
-        #{status}, #{created}, #{updated})
+        #{status}, NOW(), NOW())
     </insert>
     <!--删除商品-->
     <delete id="deleteById" parameterType="java.lang.Long">
