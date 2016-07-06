@@ -1,4 +1,4 @@
-package com.onlineshop.bean;
+package com.gloryofme.onlineshop.common.bean;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
