@@ -1,14 +1,14 @@
 package com.gloryofme.onlineshop.manage.pojo;
 
-/**商品操作的参数类
+/**商品参数类
  * Created by YU on 2016/6/9.
  */
 public class ItemParam extends BasePojo {
     private Long id;
-    private String title;
-    private Integer num;
-    private Long price;
-    private Byte status;
+
+    private Long itemCatId;
+
+    private String paramData;
 
     public Long getId() {
         return id;
@@ -18,35 +18,19 @@ public class ItemParam extends BasePojo {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public Long getItemCatId() {
+        return itemCatId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setItemCatId(Long itemCatId) {
+        this.itemCatId = itemCatId;
     }
 
-    public Integer getNum() {
-        return num;
+    public String getParamData() {
+        return paramData;
     }
 
-    public void setNum(Integer num) {
-        this.num = num;
-    }
-
-    public Long getPrice() {
-        return price;
-    }
-
-    public void setPrice(Long price) {
-        this.price = price;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
+    public void setParamData(String paramData) {
+        this.paramData = paramData;
     }
 }
