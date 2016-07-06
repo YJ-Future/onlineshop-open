@@ -58,11 +58,12 @@ public class ItemCategory extends BasePojo{
         this.sortOrder = sortOrder;
     }
 
-    public Boolean getParent() {
+    public Boolean getIsParent() {
         return isParent;
     }
 
-    public void setParent(Boolean parent) {
+    public void setIsParent(Boolean parent) {
         isParent = parent;
     }
+
 }
