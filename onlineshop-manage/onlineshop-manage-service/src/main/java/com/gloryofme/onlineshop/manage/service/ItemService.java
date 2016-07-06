@@ -5,9 +5,7 @@ import com.gloryofme.onlineshop.manage.pojo.Item;
 /**
  * Created by YU on 2016/6/9.
  */
-public interface ItemService {
+public interface ItemService extends BaseService<Item>{
 
-    Item selectById(Long id);
-
-
+    int insertItem(Item item, String desc, String paramData);
 }
