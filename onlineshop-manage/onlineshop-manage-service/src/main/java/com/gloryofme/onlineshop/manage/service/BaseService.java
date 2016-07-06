@@ -7,7 +7,7 @@ import java.util.List;
  */
 public interface BaseService<T> {
     T selectById(Long id);
-    T select(T t);
+    List<T> select(T t);
     Long selectCount();
     List<T> selectPage(int page, int rows);
     int insert(T t);
