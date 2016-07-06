@@ -7,7 +7,7 @@ public class ItemDesc extends BasePojo {
     //商品ID
     private Long itemId;
     //商品描述
-    private String desc;
+    private String itemDesc;
 
     public Long getItemId() {
         return itemId;
@@ -17,11 +17,11 @@ public class ItemDesc extends BasePojo {
         this.itemId = itemId;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getItemDesc() {
+        return itemDesc;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setItemDesc(String itemDesc) {
+        this.itemDesc = itemDesc;
     }
 }
