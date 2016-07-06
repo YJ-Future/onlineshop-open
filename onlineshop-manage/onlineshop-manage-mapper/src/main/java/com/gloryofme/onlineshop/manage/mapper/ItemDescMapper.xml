@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gloryofme.onlineshop.manage.mapper.ItemDescMapper">
+    <!--返回结果-->
+    <resultMap id = "ItemDescMap" type = "com.gloryofme.onlineshop.manage.pojo.ItemDesc">
+        <id property="itemId" column = "item_id" jdbcType="BIGINT"/>
+        <id property="itemDesc" column = "item_desc" jdbcType="VARCHAR"/>
+        <result column = "created" property = "created" jdbcType="TIMESTAMP"/>
+        <result column = "updated" property = "updated" jdbcType = "TIMESTAMP"/>
+    </resultMap>
+    <!--操作-->
+    <!--查询商品参数 -->
+    <select id = "selectByItemId" parameterType="Long" resultMap = "ItemDescMap">
+        select
+        <include refid="base_column_list"/>
+        from tb_item_desc
+        where id = #{itemId}
+        limit 0,1
+    </select>
+
+    <select id = "select" parameterType="com.gloryofme.onlineshop.manage.pojo.ItemDesc" resultMap="ItemDescMap">
+        select
+        <include refid="base_column_list"/>
+        from tb_item_desc
+        <include refid="selectCondition"/>
+    </select>
+
+    <select id = "selectPage"   resultMap="ItemDescMap">
+        select
+        <include refid="base_column_list"/>
+        from tb_item_desc
+        <if test = "start != null and start >= 0 and size != null and size > 0">
+            limit #{start},#{size}
+        </if>
+    </select>
+
+    <!--获取总商品参数个数-->
+    <select id="selectCount" resultType="java.lang.Long">
+        select count(0) from tb_item_desc
+    </select>
+    <!--添加商品参数-->
+    <insert id = "insert" parameterType="com.gloryofme.onlineshop.manage.pojo.ItemDesc">
+        insert into tb_item_desc (
+        <include refid="base_column_list"/>
+        )
+        values (#{itemId},  #{itemDesc},NOW(), NOW())
+    </insert>
+    <!--删除商品参数-->
+    <delete id="deleteByItemId" parameterType="java.lang.Long">
+        delete from tb_item_desc
+        where id = #{itemId}
+    </delete>
+
+    <!--更新商品参数-->
+    <update id="update" parameterType="com.gloryofme.onlineshop.manage.pojo.ItemDesc">
+        <if test="itemId != null and itemId > 0">
+            update tb_item_desc
+            <trim prefix = "set" prefixOverrides="," suffixOverrides=",">
+                <if test="itemId !=null">
+                    item_id = #{itemId},
+                </if>
+                <if test="itemDesc != null and !itemDesc.isEmpty()">
+                    item_desc = #{itemDesc}
+                </if>
+                <if test="created != null">
+                    created = #{created}
+                </if>
+                <if test="updated != null">
+                    updated = #{updated}
+                </if>
+            </trim>
+            where item_id = #{itemId}
+        </if>
+    </update>
+
+    <!--sql片段-->
+    <!--查询的基本字段-->
+    <sql id = "base_column_list">
+        item_id, item_desc, created, updated
+    </sql>
+    <!--查询条件-->
+    <sql id = "selectCondition">
+        <trim prefix="where" prefixOverrides = "and|or" suffixOverrides = "and|or" >
+            <if test = "itemId != null">
+                and item_id = #{itemId}
+            </if>
+            <if test = "itemDesc != null">
+                and item_desc = #{itemDesc}
+            </if>
+        </trim>
+    </sql>
+</mapper>
