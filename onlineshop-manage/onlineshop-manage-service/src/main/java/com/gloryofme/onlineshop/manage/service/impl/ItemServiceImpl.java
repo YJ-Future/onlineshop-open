@@ -31,7 +31,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Item select(Item item) {
+    public List<Item> select(Item item) {
         return itemMapper.select(item);
     }
 

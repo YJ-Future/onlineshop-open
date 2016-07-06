@@ -35,7 +35,7 @@ public class ItemParamServiceImpl implements ItemParamService {
     }
 
     @Override
-    public ItemParam select(ItemParam itemParam) {
+    public List<ItemParam> select(ItemParam itemParam) {
         return itemParamMapper.select(itemParam);
     }
 
