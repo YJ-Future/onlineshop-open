@@ -11,6 +11,8 @@ import com.gloryofme.onlineshop.manage.pojo.ItemCategory;
 import com.gloryofme.onlineshop.manage.pojo.ItemCategoryResult;
 import com.gloryofme.onlineshop.manage.service.ItemCategoryService;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,9 @@ import java.util.Map;
  */
 @Service
 public class ItemCategoryServiceImpl implements ItemCategoryService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ItemCategoryServiceImpl.class);
+
     @Autowired(required = false)
     private ItemCategoryMapper categoryMapper;
     @Autowired
@@ -46,25 +51,30 @@ public class ItemCategoryServiceImpl implements ItemCategoryService {
      */
     @Override
     public List<ItemCategory> selectItemCategoryList(Long parentId) {
-        //首先去缓存中查找
-        JavaType javaType = MAPPER.getTypeFactory().constructParametricType(List.class,ItemCategory.class);
+        //缓存取
         String redisKey = REDIS_KEY_ITEMCAT+parentId;
-        String value = redisService.get(redisKey);
-        if(StringUtils.isNoneBlank(value)){
-            try {
-                return MAPPER.readValue(value, javaType);
-            } catch (IOException e) {
-                e.printStackTrace();
+        try{
+            JavaType javaType = MAPPER.getTypeFactory().constructParametricType(List.class,ItemCategory.class);
+            String value = redisService.get(redisKey);
+            if(StringUtils.isNoneBlank(value)){
+                try {
+                    return MAPPER.readValue(value, javaType);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
+        }catch(Exception e){
+            LOGGER.debug("redis service item category service error");
         }
+        //数据库取
         ItemCategory category = new ItemCategory();
         category.setParentId(parentId);
         List<ItemCategory> result =  categoryMapper.select(category);
-        //添加到缓存中
+        //缓存存
         try {
             redisService.set(redisKey, MAPPER.writeValueAsString(result), REDIS_EXPIRE_TIME);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            LOGGER.debug("redis service item category service error");
         }
         return result;
     }
