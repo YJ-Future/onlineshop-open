@@ -73,7 +73,7 @@ public class ItemCategoryServiceImpl implements ItemCategoryService {
         //缓存存
         try {
             redisService.set(redisKey, MAPPER.writeValueAsString(result), REDIS_EXPIRE_TIME);
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
             LOGGER.debug("redis service item category service error");
         }
         return result;
