@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://manage.taotao.com/js/jquery-easyui-1.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+	alert($);
+	$(function(){
+		$.ajax({ url: "http://manage.taotao.com/js/test.json", dataType:"JSON", success: function(data){
+		    alert(data.abc);
+		}});
+	})
+</script>
+</head>
+<body>
+
+</body>
+</html>
